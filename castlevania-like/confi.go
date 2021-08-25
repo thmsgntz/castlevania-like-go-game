@@ -6,17 +6,22 @@ import (
 	"path/filepath"
 )
 
-var ExecutableName string
-var BinDir string
-var RootDir string
-var SourceDir string
-var AssetsDir string
+const (
+	WinTitle            string = "CastlevaniaLike!"
+	WinWidth, WinHeight int32  = 800, 600
+)
 
-// MetroidVania-like: https://o-lobster.itch.io/platformmetroidvania-pixel-art-asset-pack
-var MetroidVaniaDir string
+var (
+	ExecutableName string
+	BinDir         string
+	RootDir        string
+	SourceDir      string
+	AssetsDir      string
 
-var WinTitle string = "CastlevaniaLike!"
-var WinWidth, WinHeight int32 = 800, 600
+	// MetroidVania-like: https://o-lobster.itch.io/platformmetroidvania-pixel-art-asset-pack
+	MetroidVaniaDir string
+	BackgroundStart string
+)
 
 func init() {
 	fmt.Println("\nCalling Init from confi.go..")
@@ -36,4 +41,5 @@ func init() {
 	AssetsDir = filepath.Join(RootDir, "ressources", "assets")
 
 	MetroidVaniaDir = filepath.Join(AssetsDir, "metroidvania")
+	BackgroundStart = filepath.Join(MetroidVaniaDir, "tiles and background_foreground (new)", "background.png")
 }
