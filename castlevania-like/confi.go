@@ -21,6 +21,7 @@ var (
 	// MetroidVania-like: https://o-lobster.itch.io/platformmetroidvania-pixel-art-asset-pack
 	MetroidVaniaDir string
 	BackgroundStart string
+	PersonaPngPath  string
 )
 
 func init() {
@@ -42,4 +43,5 @@ func init() {
 
 	MetroidVaniaDir = filepath.Join(AssetsDir, "metroidvania")
 	BackgroundStart = filepath.Join(MetroidVaniaDir, "tiles and background_foreground (new)", "background.png")
+	PersonaPngPath = filepath.Join(MetroidVaniaDir, "herochar sprites(new)", "herochar_spritesheet(new).png")
 }
