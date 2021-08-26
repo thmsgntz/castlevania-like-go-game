@@ -17,3 +17,11 @@ func IntToArray(x int) (arr []int) {
 	}
 	return arr
 }
+
+func MaxInt32(x int32, y int32) int32 {
+	if x > y {
+		return x
+	}
+
+	return y
+}
