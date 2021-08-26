@@ -4,6 +4,13 @@ A Castlevania like game
 ![alt text](ressources/gifs/game_animations.gif) 
 
 
+
+## Assets Credits
+- Assets used for this game: https://o-lobster.itch.io/platformmetroidvania-pixel-art-asset-pack
+- email: caio.cesar222@gmail.com
+- https://o-lobster.itch.io/
+
+
 ## Tutorials
 
 Python and Patterns tuto:
@@ -17,11 +24,11 @@ Go Tuto Youtube: https://www.youtube.com/playlist?list=PLDZujg-VgQlZUy1iCqBbe5fa
 Game Development in the Go Programming Language:
 https://gamefromscratch.com/game-development-in-the-go-programming-language/
 
-Game tuto (C++) avec bonne animations explications:
+Game tuto (C++) avec bonnes animations & explications:
 https://www.youtube.com/watch?v=BySDfVNljG8&list=PL6xSOsbVA1eb_QqMTTcql_3PdOiE928up
 
 
-## Ressources:
+## Ressources
 
 - SDL2: [link](https://www.libsdl.org/index.php)
 - GO-SDL2: [link](https://github.com/veandco/go-sdl2)
@@ -35,8 +42,6 @@ Video game programming principles:
 https://www.code4projects.net/video-game-programming-principles/
 
 Game Programming Pattern - Robert Nsytrom : https://gameprogrammingpatterns.com/contents.html
-
-
 
 ## mov to gif
 
