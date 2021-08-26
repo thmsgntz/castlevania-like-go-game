@@ -108,21 +108,33 @@ func runGame() int {
 				running = false
 			case *sdl.KeyboardEvent:
 				// gestion des KEYS: https://github.com/veandco/go-sdl2-examples/blob/29a79b36df6da7ecbcb99360a99f9e71a3cf6413/examples/keyboard-input/keyboard-input.go
+
 				keyCode := t.Keysym.Sym
+
 				switch {
 				case keyCode == sdl.K_ESCAPE:
 					running = false
+
 				case keyCode == sdl.K_DOWN:
-					fmt.Println("Hello Keydown", personaPosition)
 					personaPosition.Y += 10
+
+				case keyCode == sdl.K_UP:
+					personaPosition.Y -= 10
+
+				case keyCode == sdl.K_LEFT:
+					personaPosition.X -= 10
+
+				case keyCode == sdl.K_RIGHT:
+					personaPosition.X += 10
 				}
+
 			default:
 				fmt.Printf("\n>Event non géré %v %v\n\n", event, event.GetType())
 			}
 			gameUI.ClearAndSetBackground(BackgroundStart)
 			gameUI.DrawPersona(personaPosition)
 			gameUI.renderer.Present()
-
+			sdl.Delay(16)
 		}
 	}
 

@@ -1,6 +1,8 @@
 # castlevania-like-go-game
 A Castlevania like game
 
+![alt text](ressources/gifs/output_optimized.gif) 
+
 
 ## Tutorials
 
@@ -36,3 +38,9 @@ Game Programming Pattern - Robert Nsytrom : https://gameprogrammingpatterns.com/
 
 
 
+## mov to gif
+
+https://gist.github.com/dergachev/4627207
+
+https://superuser.com/questions/436056/how-can-i-get-ffmpeg-to-convert-a-mov-to-a-gif
+https://imagemagick.org/script/download.php#macosx
