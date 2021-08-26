@@ -1,6 +1,6 @@
 # A Castlevania-like game in GO langage
 
-I have two goals right now, making a video game with my best friend and learning a new language. So I decided to do both at the same time! I'm learning [GO](www.golang.org) by making a video game.
+I have two goals right now, making a video game with my best friend and learning a new language. So I decided to do both at the same time! I'm learning [GO](https://golang.org/) by making a video game.
 
 This game relies on the [SDL development library](https://www.libsdl.org/index.php) and its great [binding for GO](https://github.com/veandco/go-sdl2).
 
