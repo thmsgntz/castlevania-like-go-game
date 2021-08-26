@@ -58,7 +58,9 @@ func runGame() int {
 				running = false
 			case *sdl.KeyboardEvent:
 				// gestion des KEYS: https://github.com/veandco/go-sdl2-examples/blob/29a79b36df6da7ecbcb99360a99f9e71a3cf6413/examples/keyboard-input/keyboard-input.go
+
 				if t.State == sdl.RELEASED {
+					gameState.StopMoving()
 					break
 				}
 

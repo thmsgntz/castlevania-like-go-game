@@ -97,15 +97,17 @@ func (g *GameUI) SetPersonaTexture(persona *Persona, imgPath string) error {
 }
 
 func (g *GameUI) DrawPersona(persona *Persona) error {
-	return g.renderer.Copy(
+	g.renderer.Copy(
 		persona.texture,
-		&HeroTilePositionOnImage,
+		persona.tileRect,
 		&sdl.Rect{
-			X: persona.position.X,
-			Y: persona.position.Y,
-			W: int32(persona.uiSize),
-			H: int32(persona.uiSize)},
+			X: persona.positionUI.X,
+			Y: persona.positionUI.Y,
+			W: persona.uiSize,
+			H: persona.uiSize},
 	)
+
+	return nil
 }
 
 func (g *GameUI) DrawTexture(texture *sdl.Texture, src *sdl.Rect, dst *sdl.Rect) error {
