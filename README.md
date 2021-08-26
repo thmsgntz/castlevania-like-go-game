@@ -1,7 +1,7 @@
 # castlevania-like-go-game
 A Castlevania like game
 
-![alt text](ressources/gifs/output_optimized.gif) 
+![alt text](ressources/gifs/game_animations.gif) 
 
 
 ## Tutorials

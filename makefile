@@ -10,6 +10,9 @@ run: build
 
 gorun:
 	go run ${SOURCES}
+
+gif:
+	scripts/mov_to_gif.sh
 	
 clean:
 	rm -f bin/*
