@@ -1,8 +1,25 @@
-# castlevania-like-go-game
-A Castlevania like game
+# A Castlevania-like game in GO langage
 
+I have two goals right now, making a video game with my best friend and learning a new language. So I decided to do both at the same time! I'm learning [GO](www.golang.org) by making a video game.
+
+This game relies on the [SDL development library](https://www.libsdl.org/index.php) and its great [binding for GO](https://github.com/veandco/go-sdl2).
+
+I upload here a gif to highlight the progress of the project.
 ![alt text](ressources/gifs/game_animations.gif) 
 
+TODO list:
+- [x] Background
+- [x] Draw a character
+- [x] Design Pattern: User Interface
+- [x] Design Pattern: Game State
+- [x] Class for characters (Persona)
+- [ ] Animations (In Progress!)
+- [ ] Handle more Persona (Enemies)
+- [ ] Create a level 
+- [ ] Load the map from a file
+- [ ] Handle Collision 
+- [ ] Walk on a floor with collision!
+- [ ] ...
 
 
 ## Assets Credits
