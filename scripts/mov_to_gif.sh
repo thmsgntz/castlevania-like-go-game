@@ -6,14 +6,19 @@
 set -x
 
 MOVIES_DIRECTORY="${HOME}/Documents/screen_recordings"
+OUTPUT_DIRECTORY="ressources/gifs/"
+OUTPUT_GIF_NAME="game_animations.gif"
 FFMEPG_LOGLEVEL=0
 GIF_SIZE=800x600
+
+d=$(date +"%d-%m-%Y-%H-%M-%S")
+mv -f ${OUTPUT_DIRECTORY}/${OUTPUT_GIF_NAME} ${OUTPUT_DIRECTORY}/archives/gif_${d}.gif > /dev/null 2>&1
 
 file_mov=$(ls -t ${MOVIES_DIRECTORY}/*.mov | head -n1)
 echo $file_mov
 
-ffmpeg -v ${FFMEPG_LOGLEVEL} -ss 00:00:00.000 -i "${file_mov}" -pix_fmt rgb24 -r 10 -s ${GIF_SIZE} -t 00:00:10.000 ressources/gifs/output.gif > /dev/null
+ffmpeg -v ${FFMEPG_LOGLEVEL} -ss 00:00:00.000 -i "${file_mov}" -pix_fmt rgb24 -r 10 -s ${GIF_SIZE} -t 00:00:10.000 ${OUTPUT_DIRECTORY}/output.gif
 
-convert -layers Optimize ressources/gifs/output.gif ressources/gifs/game_animations.gif && rm -f ressources/gifs/output.gif
+convert -layers Optimize ${OUTPUT_DIRECTORY}/output.gif ${OUTPUT_DIRECTORY}/${OUTPUT_GIF_NAME} && rm -f ${OUTPUT_DIRECTORY}/output.gif
 
-du -h ressources/gifs/game_animations.gif
+du -h ${OUTPUT_DIRECTORY}/${OUTPUT_GIF_NAME}

@@ -18,6 +18,8 @@
 
 # Directories
 ressources/assets/
+ressources/gifs/archives/
+
 bin/*
 profiling/
 
