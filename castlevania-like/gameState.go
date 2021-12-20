@@ -35,6 +35,8 @@ func (state *GameState) Init() error {
 		positionUI: &sdl.Point{X: 10, Y: 10},
 		pdv:        10,
 		posture:    &POSTURE_CHAR_IDLE,
+
+		direction: &DIRECTION_DROITE,
 	}
 
 	return nil

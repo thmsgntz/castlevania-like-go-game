@@ -14,6 +14,10 @@ TODO list:
 - [x] Design Pattern: Game State
 - [x] Class for characters (Persona)
 - [ ] Animations (In Progress!)
+  - [x] Idle
+  - [x] Running
+  - [x] Flipping left when running left
+  - [ ] Jumping
 - [ ] Handle more Persona (Enemies)
 - [ ] Create a level 
 - [ ] Load the map from a file
@@ -45,7 +49,7 @@ Game tuto (C++) avec bonnes animations & explications:
 https://www.youtube.com/watch?v=BySDfVNljG8&list=PL6xSOsbVA1eb_QqMTTcql_3PdOiE928up
 
 
-## Ressources
+## Ressources
 
 - SDL2: [link](https://www.libsdl.org/index.php)
 - GO-SDL2: [link](https://github.com/veandco/go-sdl2)
@@ -66,3 +70,27 @@ https://gist.github.com/dergachev/4627207
 
 https://superuser.com/questions/436056/how-can-i-get-ffmpeg-to-convert-a-mov-to-a-gif
 https://imagemagick.org/script/download.php#macosx
+
+## Install on Windows
+
+### Check CPU architecture 
+
+```bash
+uname -m
+```
+
+### Install Mingw-builds using chocolatey
+
+```bash
+> choco install mingw
+
+> choco info mingw
+Chocolatey v0.10.15
+mingw 11.2.0 [Approved]
+```
+
+Then install SDL2, SDL2_image, SDL2_mix, SDL_ttf following GO-SDL2 instructions inside:
+```
+    installpath\chocolatey\lib\mingw\tools\install\mingw64\x86_64-w64-mingw32\
+```
+

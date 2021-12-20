@@ -42,6 +42,6 @@ func init() {
 	AssetsDir = filepath.Join(RootDir, "ressources", "assets")
 
 	MetroidVaniaDir = filepath.Join(AssetsDir, "metroidvania")
-	BackgroundStart = filepath.Join(MetroidVaniaDir, "tiles and background_foreground (new)", "background.png")
+	BackgroundStart = filepath.Join(MetroidVaniaDir, "tiles_and_background_foreground_(new)", "background.png")
 	HeroPngPath = filepath.Join(MetroidVaniaDir, "herochar sprites(new)", "herochar_spritesheet(new).png")
 }

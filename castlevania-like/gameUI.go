@@ -97,14 +97,25 @@ func (g *GameUI) SetPersonaTexture(persona *Persona, imgPath string) error {
 }
 
 func (g *GameUI) DrawPersona(persona *Persona) error {
-	g.renderer.Copy(
-		persona.texture,
-		persona.tileRect,
-		&sdl.Rect{
+	// https://wiki.libsdl.org/SDL_RenderCopyEx
+
+	var flip = sdl.FLIP_NONE
+
+	if persona.direction == &DIRECTION_GAUCHE {
+		flip = sdl.FLIP_HORIZONTAL
+	}
+
+	g.renderer.CopyEx(
+		persona.texture,  // texture
+		persona.tileRect, // srcrect
+		&sdl.Rect{ // dstrect
 			X: persona.positionUI.X,
 			Y: persona.positionUI.Y,
 			W: persona.uiSize,
 			H: persona.uiSize},
+		0,    // angle
+		nil,  // center of rotation
+		flip, // flip
 	)
 
 	return nil

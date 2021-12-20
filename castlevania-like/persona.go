@@ -21,6 +21,15 @@ var (
 	POSTURE_CHAR_RUNNING Posture = 1
 )
 
+type Direction int
+
+var (
+	DIRECTION_DROITE Direction = 0
+	DIRECTION_GAUCHE Direction = 1
+	DIRECTION_HAUT   Direction = 2
+	DIRECTION_BAS    Direction = 3
+)
+
 const (
 	HeroHeight, HeroWidth                        = 64, 64
 	HeroTileSize                                 = 16
@@ -46,6 +55,8 @@ type Persona struct {
 	pdv        uint
 	positionUI *sdl.Point
 	posture    *Posture
+
+	direction *Direction // Direction (pour flipper la texture si besoin)
 }
 
 func (persona *Persona) MovePersona(shift *sdl.Point) error {
@@ -74,28 +85,51 @@ func (persona *Persona) MovePersona(shift *sdl.Point) error {
 	persona.tileRect.X = persona.tileRunningPos.X * HeroTileSize
 	persona.tileRect.Y = persona.tileRunningPos.Y * HeroTileSize
 
-	// Position on GUI
-	var shiftTmp int32 = persona.positionUI.X + shift.X
-	switch {
-	case shiftTmp < 0:
-		persona.positionUI.X = 0
-	case shiftTmp > WinWidth:
-		persona.positionUI.X = WinWidth
-	default:
-		persona.positionUI.X = shiftTmp
+	// Position on the screen GUI on X
+	if shift.X != 0 {
+		var shiftTmp int32 = persona.positionUI.X + shift.X
+		switch {
+		case shiftTmp < 0:
+			persona.positionUI.X = 0
+		case shiftTmp > WinWidth:
+			persona.positionUI.X = WinWidth
+		default:
+			persona.positionUI.X = shiftTmp
+		}
 	}
 
-	shiftTmp = persona.positionUI.Y + shift.Y
-	switch {
-	case shiftTmp < 0:
-		persona.positionUI.Y = 0
-	case shiftTmp > WinHeight:
-		persona.positionUI.Y = WinHeight
-	default:
-		persona.positionUI.Y = shiftTmp
+	if shift.Y != 0 {
+		var shiftTmp = persona.positionUI.Y + shift.Y
+		switch {
+		case shiftTmp < 0:
+			persona.positionUI.Y = 0
+		case shiftTmp > WinHeight:
+			persona.positionUI.Y = WinHeight
+		default:
+			persona.positionUI.Y = shiftTmp
+		}
 	}
+
+	// Update la direction pour flip (ou non) la texture
+	persona.UpdateDirection(shift)
 
 	fmt.Printf("%v Pos:{%v, %v}\n", persona.name, persona.positionUI.X, persona.positionUI.Y)
 
 	return nil
+}
+
+func (persona *Persona) UpdateDirection(shift *sdl.Point) {
+	// Met à jour la direction du personnage pour que le renderer sache
+	// si on a besoin de flip ou nonla texture
+	// Ne gère pour l'instant que les directions horizatales
+
+	if shift.X == 0 {
+		return
+	}
+
+	if shift.X < 0 {
+		persona.direction = &DIRECTION_GAUCHE
+	} else {
+		persona.direction = &DIRECTION_DROITE
+	}
 }
