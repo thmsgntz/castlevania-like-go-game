@@ -1,4 +1,4 @@
-package main
+package state
 
 import (
 	"fmt"
@@ -21,7 +21,14 @@ var (
 	// MetroidVania-like: https://o-lobster.itch.io/platformmetroidvania-pixel-art-asset-pack
 	MetroidVaniaDir string
 	BackgroundStart string
-	HeroPngPath     string
+
+	// Hero
+	HeroPngPath string
+
+	// Ennemies
+	EnnemiDir string
+	EnnFlyDir string
+	EnnFlyPng string
 )
 
 func init() {
@@ -44,4 +51,8 @@ func init() {
 	MetroidVaniaDir = filepath.Join(AssetsDir, "metroidvania")
 	BackgroundStart = filepath.Join(MetroidVaniaDir, "tiles_and_background_foreground_(new)", "background.png")
 	HeroPngPath = filepath.Join(MetroidVaniaDir, "herochar sprites(new)", "herochar_spritesheet(new).png")
+
+	EnnemiDir = filepath.Join(MetroidVaniaDir, "ennemies sprites")
+	EnnFlyDir = filepath.Join(EnnemiDir, "fly")
+	EnnFlyPng = filepath.Join(EnnFlyDir, "fly_spritesheet.png")
 }

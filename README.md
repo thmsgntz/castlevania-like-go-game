@@ -48,6 +48,9 @@ https://gamefromscratch.com/game-development-in-the-go-programming-language/
 Game tuto (C++) avec bonnes animations & explications:
 https://www.youtube.com/watch?v=BySDfVNljG8&list=PL6xSOsbVA1eb_QqMTTcql_3PdOiE928up
 
+Array / List / Slice in GO
+https://go.dev/blog/slices-intro
+
 
 ## Ressources
 

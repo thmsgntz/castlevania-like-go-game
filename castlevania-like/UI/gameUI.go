@@ -1,4 +1,4 @@
-package main
+package UI
 
 import (
 	"fmt"
@@ -6,6 +6,9 @@ import (
 
 	"github.com/veandco/go-sdl2/img"
 	"github.com/veandco/go-sdl2/sdl"
+
+	"castlevania-like-go-game/castlevania-like/persona"
+	"castlevania-like-go-game/castlevania-like/state"
 )
 
 type GameUI struct {
@@ -16,13 +19,13 @@ type GameUI struct {
 
 func (g *GameUI) InitUI(title string, x int32, y int32, w int32, h int32, flags uint32) error {
 	var err error
-	g.window, err = CreateSdlWindow(title, x, y, w, h, flags)
+	g.window, err = state.CreateSdlWindow(title, x, y, w, h, flags)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to create window: %s\n", err)
 		return err
 	}
 
-	g.renderer, err = CreateSdlRenderer(g.window, -1, sdl.RENDERER_ACCELERATED)
+	g.renderer, err = state.CreateSdlRenderer(g.window, -1, sdl.RENDERER_ACCELERATED)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to create renderer: %s\n", err)
 		return err
@@ -33,7 +36,7 @@ func (g *GameUI) InitUI(title string, x int32, y int32, w int32, h int32, flags 
 	return nil
 }
 
-func (g *GameUI) Update(persona *Persona) error {
+func (g *GameUI) Update(persona *persona.Persona) error {
 	var err error
 
 	err = g.renderer.Clear()
@@ -77,7 +80,7 @@ func (g *GameUI) SetBackground(imgPath string) error {
 	return nil
 }
 
-func (g *GameUI) SetPersonaTexture(persona *Persona, imgPath string) error {
+func (g *GameUI) SetPersonaTexture(p *persona.Persona, imgPath string) error {
 	var surface *sdl.Surface
 	var err error
 	surface, err = img.Load(imgPath)
@@ -87,7 +90,7 @@ func (g *GameUI) SetPersonaTexture(persona *Persona, imgPath string) error {
 	}
 	defer surface.Free()
 
-	persona.texture, err = g.renderer.CreateTextureFromSurface(surface)
+	p.Texture, err = g.renderer.CreateTextureFromSurface(surface)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to create texturePersona: %s\n", err)
 		return err
@@ -96,23 +99,23 @@ func (g *GameUI) SetPersonaTexture(persona *Persona, imgPath string) error {
 	return nil
 }
 
-func (g *GameUI) DrawPersona(persona *Persona) error {
+func (g *GameUI) DrawPersona(p *persona.Persona) error {
 	// https://wiki.libsdl.org/SDL_RenderCopyEx
 
 	var flip = sdl.FLIP_NONE
 
-	if persona.direction == &DIRECTION_GAUCHE {
+	if p.Direction == &persona.DIRECTION_GAUCHE {
 		flip = sdl.FLIP_HORIZONTAL
 	}
 
 	g.renderer.CopyEx(
-		persona.texture,  // texture
-		persona.tileRect, // srcrect
+		p.Texture,  // texture
+		p.TileRect, // srcrect
 		&sdl.Rect{ // dstrect
-			X: persona.positionUI.X,
-			Y: persona.positionUI.Y,
-			W: persona.uiSize,
-			H: persona.uiSize},
+			X: p.PositionUI.X,
+			Y: p.PositionUI.Y,
+			W: p.UiSize,
+			H: p.UiSize},
 		0,    // angle
 		nil,  // center of rotation
 		flip, // flip
