@@ -7,14 +7,10 @@ Personas are living entities that can move, interact, live and die
 */
 
 import (
+	"castlevania-like-go-game/castlevania-like/config"
 	"fmt"
 
 	"github.com/veandco/go-sdl2/sdl"
-)
-
-const (
-	// FIX DOUBLON AVEC CONFI.GO
-	WinWidth, WinHeight int32 = 800, 600
 )
 
 type PersonaType int
@@ -133,8 +129,8 @@ func (persona *Persona) MovePersona(shift *sdl.Point) error {
 		switch {
 		case shiftTmp < 0:
 			persona.PositionUI.X = 0
-		case shiftTmp > WinWidth:
-			persona.PositionUI.X = WinWidth
+		case shiftTmp > config.WinWidth:
+			persona.PositionUI.X = config.WinWidth
 		default:
 			persona.PositionUI.X = shiftTmp
 		}
@@ -145,8 +141,8 @@ func (persona *Persona) MovePersona(shift *sdl.Point) error {
 		switch {
 		case shiftTmp < 0:
 			persona.PositionUI.Y = 0
-		case shiftTmp > WinHeight:
-			persona.PositionUI.Y = WinHeight
+		case shiftTmp > config.WinHeight:
+			persona.PositionUI.Y = config.WinHeight
 		default:
 			persona.PositionUI.Y = shiftTmp
 		}

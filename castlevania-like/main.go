@@ -9,13 +9,14 @@ import (
 	// "github.com/veandco/go-sdl2/img"
 	// "github.com/veandco/go-sdl2/sdl"
 	"castlevania-like-go-game/castlevania-like/UI"
+	"castlevania-like-go-game/castlevania-like/config"
 	"castlevania-like-go-game/castlevania-like/state"
 	_ "castlevania-like-go-game/utils"
 )
 
 func runGame() int {
 	var gameUI UI.GameUI
-	var gState state.GameState
+	var gameState state.GameState
 	var err error
 	var event sdl.Event
 
@@ -26,19 +27,19 @@ func runGame() int {
 	}
 	defer sdl.Quit()
 
-	err = gState.Init()
+	err = gameState.Init()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to init the state! %s.\n", err)
 		return 1
 	}
-	defer gState.Destroy()
+	defer gameState.Destroy()
 
 	err = gameUI.InitUI(
-		state.WinTitle,
+		config.WinTitle,
 		sdl.WINDOWPOS_UNDEFINED,
 		sdl.WINDOWPOS_UNDEFINED,
-		state.WinWidth,
-		state.WinHeight,
+		config.WinWidth,
+		config.WinHeight,
 		sdl.WINDOW_SHOWN,
 	)
 	if err != nil {
@@ -47,8 +48,8 @@ func runGame() int {
 	}
 	defer gameUI.DestroyUI()
 
-	gameUI.SetBackground(state.BackgroundStart)
-	gameUI.SetPersonaTexture(gState.Hero(), state.HeroPngPath)
+	gameUI.SetBackground(config.BackgroundStart)
+	gameUI.SetPersonaTexture(gameState.Hero(), config.HeroPngPath)
 
 	// while true show
 	running := true
@@ -62,7 +63,7 @@ func runGame() int {
 				// gestion des KEYS: https://github.com/veandco/go-sdl2-examples/blob/29a79b36df6da7ecbcb99360a99f9e71a3cf6413/examples/keyboard-input/keyboard-input.go
 
 				if t.State == sdl.RELEASED {
-					gState.StopMoving()
+					gameState.StopMoving()
 					break
 				}
 
@@ -73,23 +74,23 @@ func runGame() int {
 					running = false
 
 				case keyCode == sdl.K_DOWN:
-					gState.Move(&sdl.Point{X: 0, Y: +10})
+					gameState.Move(&sdl.Point{X: 0, Y: +10})
 
 				case keyCode == sdl.K_UP:
-					gState.Move(&sdl.Point{X: 0, Y: -10})
+					gameState.Move(&sdl.Point{X: 0, Y: -10})
 
 				case keyCode == sdl.K_LEFT:
-					gState.Move(&sdl.Point{X: -10, Y: 0})
+					gameState.Move(&sdl.Point{X: -10, Y: 0})
 
 				case keyCode == sdl.K_RIGHT:
-					gState.Move(&sdl.Point{X: 10, Y: 0})
+					gameState.Move(&sdl.Point{X: 10, Y: 0})
 				}
 
 			default:
 				// fmt.Printf("\n>Event non géré %v %v\n\n", event, event.GetType())
 			}
 
-			gameUI.Update(gState.Hero())
+			gameUI.Update(gameState.Hero())
 			sdl.Delay(16)
 		}
 	}
