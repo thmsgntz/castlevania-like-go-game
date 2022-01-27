@@ -16,9 +16,9 @@ import (
 type PersonaType int
 
 var (
-	PERSONA_TYPE_HERO   PersonaType = 0
-	PERSONA_TYPE_ENNEMY PersonaType = 1
-	PERSONA_TYPE_E_FLY  PersonaType = 2
+	PERSONA_TYPE_HERO      PersonaType = 0
+	PERSONA_TYPE_ENEMY     PersonaType = 1
+	PERSONA_TYPE_ENEMY_FLY PersonaType = 2
 )
 
 type Posture int
@@ -67,34 +67,19 @@ type Persona struct {
 	Direction *Direction // Direction (pour flipper la texture si besoin)
 }
 
-func CreateEnnemiFly(location *sdl.Point) *Persona {
-	persona := &Persona{
-		Texture: nil,
-		TileRect: &sdl.Rect{
-			X: 0,
-			Y: 5 * HeroTileSize,
-			W: HeroTileSize,
-			H: HeroTileSize,
-		},
+func CreatePersona(enn_type PersonaType, location *sdl.Point, name string) (persona *Persona, err error) {
 
-		TileIdlingPos: &sdl.Point{X: 0, Y: 1},
-		TileIdleNbImg: 3,
+	switch enn_type {
+	case PERSONA_TYPE_ENEMY_FLY:
+		persona = CreateEnnemiFly(location, name)
+	case PERSONA_TYPE_HERO:
+		persona = CreateHero(location, name)
 
-		TileRunningPos:   &sdl.Point{X: 0, Y: 3},
-		TileRunningNbImg: 3,
-
-		Name:        "Fly",
-		UiSize:      HeroUISize,
-		TypePersona: PERSONA_TYPE_E_FLY,
-
-		PositionUI: location,
-		Pdv:        10,
-		Posture:    &POSTURE_CHAR_IDLE,
-
-		Direction: &DIRECTION_DROITE,
+	default:
+		return nil, fmt.Errorf(fmt.Sprintf("Enemy Type %d not implemented", enn_type))
 	}
 
-	return persona
+	return persona, err
 }
 
 func (persona *Persona) MovePersona(shift *sdl.Point) error {

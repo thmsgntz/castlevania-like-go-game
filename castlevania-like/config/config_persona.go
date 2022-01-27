@@ -8,17 +8,17 @@ var (
 	// Hero
 	HeroPngPath string
 
-	// Ennemies
-	EnnemiDir string
-	EnnFlyDir string
-	EnnFlyPng string
+	// Enemies
+	EnemiDir string
+	EnFlyDir string
+	EnFlyPng string
 )
 
 func init_persona(assets_dir string) {
 
 	HeroPngPath = filepath.Join(assets_dir, "herochar sprites(new)", "herochar_spritesheet(new).png")
 
-	EnnemiDir = filepath.Join(assets_dir, "ennemies sprites")
-	EnnFlyDir = filepath.Join(EnnemiDir, "fly")
-	EnnFlyPng = filepath.Join(EnnFlyDir, "fly_spritesheet.png")
+	EnemiDir = filepath.Join(assets_dir, "enemies sprites")
+	EnFlyDir = filepath.Join(EnemiDir, "fly")
+	EnFlyPng = filepath.Join(EnFlyDir, "fly_spritesheet.png")
 }

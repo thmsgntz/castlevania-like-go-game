@@ -10,6 +10,7 @@ import (
 	// "github.com/veandco/go-sdl2/sdl"
 	"castlevania-like-go-game/castlevania-like/UI"
 	"castlevania-like-go-game/castlevania-like/config"
+	"castlevania-like-go-game/castlevania-like/persona"
 	"castlevania-like-go-game/castlevania-like/state"
 	_ "castlevania-like-go-game/utils"
 )
@@ -19,6 +20,7 @@ func runGame() int {
 	var gameState state.GameState
 	var err error
 	var event sdl.Event
+	var ennemy_persona *persona.Persona
 
 	err = sdl.Init(sdl.INIT_EVERYTHING)
 	if err != nil {
@@ -50,6 +52,21 @@ func runGame() int {
 
 	gameUI.SetBackground(config.BackgroundStart)
 	gameUI.SetPersonaTexture(gameState.Hero(), config.HeroPngPath)
+
+	// Working on Adding Monsters
+	ennemy_persona, err = persona.CreatePersona(persona.PERSONA_TYPE_ENEMY_FLY, &sdl.Point{X: 600, Y: 25}, "FLY ")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error while created ennemy: %s", err.Error())
+		return 1
+	}
+	err = gameUI.SetPersonaTexture(ennemy_persona, config.EnFlyPng)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error while setting enemy texture: %s", err.Error())
+		return 1
+	}
+	fmt.Printf("%s : %t\n", gameState.Hero().Name, gameState.Hero().Texture)
+	fmt.Printf("%s : %t\n", ennemy_persona.Name, ennemy_persona.Texture)
+	gameState.AddEnnemy(ennemy_persona)
 
 	// while true show
 	running := true
@@ -90,7 +107,7 @@ func runGame() int {
 				// fmt.Printf("\n>Event non géré %v %v\n\n", event, event.GetType())
 			}
 
-			gameUI.Update(gameState.Hero())
+			gameUI.Update(&gameState)
 			sdl.Delay(16)
 		}
 	}

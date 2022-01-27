@@ -18,7 +18,7 @@ TODO list:
   - [x] Running
   - [x] Flipping left when running left
   - [ ] Jumping
-- [ ] Handle more Persona (Enemies)
+- [ ] Handle more Persona (Enemies) <- Working here (27/01/2022)
 - [ ] Create a level 
 - [ ] Load the map from a file
 - [ ] Handle Collision 

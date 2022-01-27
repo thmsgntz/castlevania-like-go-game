@@ -8,6 +8,7 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 
 	"castlevania-like-go-game/castlevania-like/persona"
+	"castlevania-like-go-game/castlevania-like/state"
 )
 
 type GameUI struct {
@@ -35,22 +36,34 @@ func (g *GameUI) InitUI(title string, x int32, y int32, w int32, h int32, flags 
 	return nil
 }
 
-func (g *GameUI) Update(persona *persona.Persona) error {
+func (g *GameUI) Update(gameState *state.GameState) error {
 	var err error
 
+	// Clear the screen
 	err = g.renderer.Clear()
 	if err != nil {
 		panic(err)
 	}
 
+	// Draw Background
 	err = g.DrawTexture(g.backgroundTexture, nil, nil)
 	if err != nil {
 		panic(err)
 	}
 
-	err = g.DrawPersona(persona)
+	// Draw Hero
+	err = g.DrawPersona(gameState.Hero())
 	if err != nil {
 		panic(err)
+	}
+
+	//Draw Enemies
+	for _, value := range gameState.Enemies() {
+		err = g.DrawPersona(value)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error while drawing: %s", err)
+			panic(err)
+		}
 	}
 
 	g.renderer.Present()
@@ -98,7 +111,7 @@ func (g *GameUI) SetPersonaTexture(p *persona.Persona, imgPath string) error {
 	return nil
 }
 
-func (g *GameUI) DrawPersona(p *persona.Persona) error {
+func (g *GameUI) DrawPersona(p *persona.Persona) (err error) {
 	// https://wiki.libsdl.org/SDL_RenderCopyEx
 
 	var flip = sdl.FLIP_NONE
@@ -107,7 +120,9 @@ func (g *GameUI) DrawPersona(p *persona.Persona) error {
 		flip = sdl.FLIP_HORIZONTAL
 	}
 
-	g.renderer.CopyEx(
+	fmt.Fprintf(os.Stdout, "Drawing %s\n", p.Name)
+
+	err = g.renderer.CopyEx(
 		p.Texture,  // texture
 		p.TileRect, // srcrect
 		&sdl.Rect{ // dstrect
@@ -120,7 +135,7 @@ func (g *GameUI) DrawPersona(p *persona.Persona) error {
 		flip, // flip
 	)
 
-	return nil
+	return err
 }
 
 func (g *GameUI) DrawTexture(texture *sdl.Texture, src *sdl.Rect, dst *sdl.Rect) error {

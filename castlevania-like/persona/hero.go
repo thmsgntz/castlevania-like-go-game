@@ -2,7 +2,7 @@ package persona
 
 import "github.com/veandco/go-sdl2/sdl"
 
-func CreateHero(location *sdl.Point) *Persona {
+func CreateHero(location *sdl.Point, name string) *Persona {
 	persona := &Persona{
 		Texture: nil,
 		TileRect: &sdl.Rect{
@@ -18,7 +18,7 @@ func CreateHero(location *sdl.Point) *Persona {
 		TileRunningPos:   &sdl.Point{X: 0, Y: 1},
 		TileRunningNbImg: 6,
 
-		Name:        "HOTG",
+		Name:        name,
 		UiSize:      HeroUISize,
 		TypePersona: PERSONA_TYPE_HERO,
 
