@@ -64,8 +64,8 @@ func runGame() int {
 		fmt.Fprintf(os.Stderr, "Error while setting enemy texture: %s", err.Error())
 		return 1
 	}
-	fmt.Printf("%s : %t\n", gameState.Hero().Name, gameState.Hero().Texture)
-	fmt.Printf("%s : %t\n", ennemy_persona.Name, ennemy_persona.Texture)
+	// fmt.Printf("%s : %t\n", gameState.Hero().Name, gameState.Hero().Texture)
+	// fmt.Printf("%s : %t\n", ennemy_persona.Name, ennemy_persona.Texture)
 	gameState.AddEnnemy(ennemy_persona)
 
 	// while true show

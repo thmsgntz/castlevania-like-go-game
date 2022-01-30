@@ -1,7 +1,9 @@
 package state
 
 import (
+	"castlevania-like-go-game/castlevania-like/config"
 	"castlevania-like-go-game/castlevania-like/persona"
+	"fmt"
 
 	"github.com/veandco/go-sdl2/sdl"
 )
@@ -17,6 +19,7 @@ func (state *GameState) Init() error {
 
 	// Init Hero
 	state.hero = persona.CreateHero(&sdl.Point{X: 10, Y: 10}, "Hero 1")
+	state.SetMapLevel(1)
 
 	return nil
 }
@@ -48,4 +51,18 @@ func (state *GameState) Hero() *persona.Persona {
 
 func (state *GameState) Enemies() []*persona.Persona {
 	return state.ennemies
+}
+
+func (state *GameState) SetMapLevel(levelNb int) (err error) {
+	switch levelNb {
+	case 1:
+		{
+			LoadLevelFromFile(config.MapLevel1Path)
+		}
+	default:
+		{
+			return fmt.Errorf("Level Number does not exist")
+		}
+	}
+	return err
 }

@@ -32,7 +32,7 @@ func init() {
 	AssetsDir = filepath.Join(RootDir, "ressources", "assets", "metroidvania")
 
 	// INIT UI variables
-	init_ui(AssetsDir)
+	init_ui(RootDir, AssetsDir)
 
 	// INIT PERSONA variables
 	init_persona(AssetsDir)
