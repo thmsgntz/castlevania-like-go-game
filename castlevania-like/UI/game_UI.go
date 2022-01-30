@@ -120,7 +120,7 @@ func (g *GameUI) DrawPersona(p *persona.Persona) (err error) {
 		flip = sdl.FLIP_HORIZONTAL
 	}
 
-	fmt.Fprintf(os.Stdout, "Drawing %s\n", p.Name)
+	// fmt.Fprintf(os.Stdout, "Drawing %s\n", p.Name)
 
 	err = g.renderer.CopyEx(
 		p.Texture,  // texture
